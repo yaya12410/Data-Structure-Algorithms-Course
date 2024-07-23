@@ -1,1 +1,1 @@
-Array is only passed as a parameter by address.\
+Array is only passed as a parameter by address.

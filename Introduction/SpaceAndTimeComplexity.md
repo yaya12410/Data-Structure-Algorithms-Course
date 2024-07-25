@@ -7,6 +7,4 @@ Searching for a particular number rather it is there or not, the time taking in 
 *To access all the elements, we would write a for loop that goes through all the elements once, then this for a list of n elements the time is order of n -->> O(n).\
 In case we are comparing each element with all other elements in a list having n elements so every element is compared with n elements therefore it's around nXn comparison then it takes time of O(n^2).*
 
-In order to do what's mentioned in the previous case the code should be two nested for loop, then mostly when two nested loops exist the time is probably O(n^2).   
-
-Space Complexity:\
+In order to do what's mentioned in the previous case the code should be two nested for loop, then mostly when two nested loops exist the time is probably O(n^2).

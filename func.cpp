@@ -1,24 +1,74 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-struct Array
+#include<iostream>
+using namespace std;
+class Array
 {
-    int A[10];
+private:
+    int *A;
     int sizee;
     int length;
-};
 
-void Display(struct Array arr)
+public:
+    Array()
+    {
+        sizee = 10;
+        length = 0;
+        A = new int[sizee];
+    }
+    Array(int sz)
+    {
+        sizee = sz;
+        length = 0;
+        A = new int[sizee];
+    }
+    ~Array()
+    {
+        delete []A;
+    }
+    
+void Display();
+void Swap(int *x, int *y);
+void Append(int x);
+void Insert(int index, int val);
+int Delete(int index);
+int Get(int index);
+void Set(int val, int index);
+int Max();
+int Min();
+int Sum();
+float Avg();
+void Reverse();
+void SwapReverse();
+void InsertSort(int x);
+int isSorted();
+void ReArrange();
+struct Array * Merge(struct Array *arr2);
+};
+int main()
+{
+    struct Array arr1 = {10};
+    struct Array arr2;
+    struct Array *arr3;
+    arr1.Insert(0, 14);
+    arr1.Display();
+    // arr3 = Merge(&arr1, &arr2);
+    // Display(*arr3);
+    return 0;
+}
+
+
+void Array::Display()
 {
     int i;
-    printf("\nElements are\n");
-    for(i=0; i<arr.length; i++)
+    // printf("\nElements are\n");
+    for(i=0; i<length; i++)
     {
-        printf("%d ", arr.A[i]);
+        cout<<A[i]<<endl;
     }
 }
 
-void Swap(int *x, int *y)
+void Array::Swap(int *x, int *y)
 {
     int temp;
     temp = *x;
@@ -26,143 +76,143 @@ void Swap(int *x, int *y)
     *y = temp;
 }
 
-void Append(struct Array *arr, int x)
+void Array::Append(int x)
 {
-    if((arr->length)<arr->sizee){
-        arr->A[arr->length++] = x;
+    if((length)<sizee){
+        A[length++] = x;
     }
 }
 
-void Insert(struct Array *arr, int index, int val)
+void Array::Insert(int index, int val)
 {
     int i;
-    if(index>=0 && index<=arr->length)
+    if(index>=0 && index<=length)
     {
-        for(i=arr->length; i>index; i--)
+        for(i=length; i>index; i--)
         {
-            arr->A[i] = arr->A[i-1];
+            A[i] = A[i-1];
         }
-        arr->A[index] = val;
-        arr->length++;
+        A[index] = val;
+        length++;
     }
 }
 
-int Delete(struct Array *arr, int index)
+int Array::Delete(int index)
 {
     int x = 0;
     int i;
-    if(index>=0 && index<(arr->length))
+    if(index>=0 && index<(length))
     {
-        x = arr->A[index];
-        for(i=index; i<arr->length-1; i++)
+        x = A[index];
+        for(i=index; i<length-1; i++)
         {
-            arr->A[i] = arr->A[i+1];
+            A[i] = A[i+1];
         }
-        arr->length--;
+        length--;
         return x;
     }
     return x;
 }
 
-int Get(struct Array arr, int index)
+int Array::Get(int index)
 {
-    if(index<arr.length && index>=0)
+    if(index<length && index>=0)
     {
-        return arr.A[index];
+        return A[index];
     }
     return -1;
 }
 
-void Set(struct Array *arr, int val, int index)
+void Array::Set(int val, int index)
 {
-    if(index>=0 && index<arr->length)
+    if(index>=0 && index<length)
     {
-        arr->A[index] = val;
+        A[index] = val;
     }
 }
 
-int Max(struct Array arr){
-    int max = arr.A[0];
-    for(int i=0; i<arr.length; i++)
+int Array::Max(){
+    int max = A[0];
+    for(int i=0; i<length; i++)
     {
-        if(arr.A[i]>max){
-            max = arr.A[i];
+        if(A[i]>max){
+            max = A[i];
         }
     }
     return max;
 }
 
-int Min(struct Array arr){
-    int min = arr.A[0];
-    for(int i=0; i<arr.length; i++)
+int Array::Min(){
+    int min = A[0];
+    for(int i=0; i<length; i++)
     {
-        if(arr.A[i]<min){
-            min = arr.A[i];
+        if(A[i]<min){
+            min = A[i];
         }
     }
     return min;
 }
 
-int Sum(struct Array arr)
+int Array::Sum()
 {
     int sum = 0;
-    for(int i=0; i<arr.length; i++)
+    for(int i=0; i<length; i++)
     {
-        sum += arr.A[i];
+        sum += A[i];
     }
     return sum;
 }
 
-float Avg(struct Array arr)
+float Array::Avg()
 {
-    return (float)Sum(arr)/arr.length;
+    return (float)Sum()/length;
 }
 
-void Reverse(struct Array *arr)
+void Array::Reverse()
 {
     int *B;
     int temp;
-    B = (int *)malloc(arr->length*sizeof(int));
-    for(int i=0, j=arr->length-1; j>=0; i++, j--)
+    B = (int *)malloc(length*sizeof(int));
+    for(int i=0, j=length-1; j>=0; i++, j--)
     {
-        B[i] = arr->A[j];
+        B[i] = A[j];
     }
-    for(int i=0; i<arr->length; i++)
+    for(int i=0; i<length; i++)
     {
-        arr->A[i] = B[i];
+        A[i] = B[i];
     }
 }
 
-void SwapReverse(struct Array *arr)
+void Array::SwapReverse()
 {
     int i, j;
-    for(i=0, j=arr->length-1; i<j; i++, j--)
+    for(i=0, j=length-1; i<j; i++, j--)
     {
-        Swap(&arr->A[i], &arr->A[j]);
+        Swap(&A[i], &A[j]);
     }
 }
 
-void InsertSort(struct Array *arr, int x)
+void Array::InsertSort(int x)
 {
-    int i = arr->length-1;
-    if(arr->length == arr->sizee){
+    int i = length-1;
+    if(length == sizee){
         return;
     }
-    while(arr->A[i]>x && i>=0)
+    while(A[i]>x && i>=0)
     {
-        arr->A[i+1] = arr->A[i];
+        A[i+1] = A[i];
         i--;
     }
-    arr->A[i+1] = x;
-    arr->length++;
+    A[i+1] = x;
+    length++;
 
 }
 
-int isSorted(struct Array arr)
+int Array::isSorted()
 {
-    for(int i=0; i<arr.length-1; i++)
+    for(int i=0; i<length-1; i++)
     {
-        if(arr.A[i]>arr.A[i+1])
+        if(A[i]>A[i+1])
         {
             return 0;
         }
@@ -170,33 +220,52 @@ int isSorted(struct Array arr)
     return 1;
 }
 
-void ReArrange(struct Array *arr)
+void Array::ReArrange()
 {
     int i, j;
     i = 0;
-    j = arr->length-1;
+    j = length-1;
     while(i<j)
     {
-        while(arr->A[i]<0)
+        while(A[i]<0)
         {
             i++;
         }
-        while(arr->A[j]>0)
+        while(A[j]>0)
         {
             j--;
         }
         if(i<j)
         {
-            Swap(&arr->A[i], &arr->A[j]);
+            Swap(&A[i], &A[j]);
         }
     }
 }
 
-int main()
+struct Array * Array::Merge(struct Array *arr2)
 {
-    struct Array arr = {{2, -1233, 5, 10, -15}, 10, 5};
-    InsertSort(&arr, 12);
-    ReArrange(&arr);
-    Display(arr);
-    return 0;
+    int i=0, j=0, k=0;
+    struct Array *arr3 = (struct Array *) malloc(sizeof(struct Array));
+    while(i<length && j<arr2->length)
+    {
+        if(A[i]<arr2->A[j])
+        {
+            arr3->A[k++] = A[i++];
+        }
+        else
+        {
+            arr3->A[k++] = arr2->A[j++];
+        }
+    }
+    for(;i<length; i++)
+    {
+        arr3->A[k++] = A[i];
+    }
+    for(;j<arr2->length; j++)
+    {
+        arr3->A[k++] = arr2->A[j];
+    }
+    arr3->length = length + arr2->length;
+    arr3->sizee = 10;
+    return arr3;
 }

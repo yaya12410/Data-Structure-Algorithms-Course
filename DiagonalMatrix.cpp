@@ -5,7 +5,7 @@ using namespace std;
 
 struct Matrix
 {
-    int A[10];
+    int *A;
     int n;
 };
 
@@ -50,14 +50,8 @@ void Display(struct Matrix m)
 int main()
 {
     struct Matrix m;
-    m.n = 4;
-
-    Set(&m, 1, 1, 5);
-    Set(&m, 2, 2, 8);
-    Set(&m, 3, 3, 9);
-    Set(&m, 4, 4, 12);
-
-    Display(m);
-
+    printf("What are the dimensions?\n");
+    scanf("%d", &m.n);
+    m.A = (int *) malloc(((m.n)*((m.n)-1)/2)*sizeof(int));
     return 0;
 }

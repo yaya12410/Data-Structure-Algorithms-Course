@@ -1,4 +1,8 @@
 {
+ Section-5-Recursion
+
+ Section-6-Arrays-Representation
+ main
   "version": "0.2.0",
   "configurations": [
     {
@@ -8,8 +12,13 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
+ Section-5-Recursion
       "cwd": ".",
       "program": "build/Debug/outDebug",
+
+      "cwd": "c:/Users/DELL/OneDrive/Desktop/Data-Structure-Algorithms-Course",
+      "program": "c:/Users/DELL/OneDrive/Desktop/Data-Structure-Algorithms-Course/build/Debug/outDebug",
+ main
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
@@ -21,4 +30,14 @@
       ]
     }
   ]
+ Section-5-Recursion
+
+
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": []
+ main
+ main
 }

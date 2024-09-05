@@ -2,14 +2,23 @@
     "tasks": [
         {
             "type": "cppbuild",
+ Section-6-Arrays-Representation
             "label": "C/C++: g++.exe build active file",
             "command": "C:\\MinGW\\bin\\g++.exe",
+
+            "label": "C/C++: g++ build active file",
+            "command": "/usr/bin/g++",
+ main
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 "-o",
+ Section-6-Arrays-Representation
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
+
+                "${fileDirname}/${fileBasenameNoExtension}"
+ main
             ],
             "options": {
                 "cwd": "${fileDirname}"

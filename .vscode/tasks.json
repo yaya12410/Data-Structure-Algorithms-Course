@@ -2,6 +2,10 @@
     "tasks": [
         {
             "type": "cppbuild",
+ Section-5-Recursion
+            "label": "C/C++: g++.exe build active file",
+            "command": "C:\\MinGW\\bin\\g++.exe",
+
  Section-6-Arrays-Representation
             "label": "C/C++: g++.exe build active file",
             "command": "C:\\MinGW\\bin\\g++.exe",
@@ -9,15 +13,20 @@
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
  main
+ main
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
                 "${file}",
                 "-o",
+ Section-5-Recursion
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+
  Section-6-Arrays-Representation
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
 
                 "${fileDirname}/${fileBasenameNoExtension}"
+ main
  main
             ],
             "options": {

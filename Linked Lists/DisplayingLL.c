@@ -77,6 +77,15 @@ int sum(struct Node *p)
     return total;
 }
 
+int RSum(struct Node *p)
+{
+    if(!p)
+    {
+        return 0;
+    }
+    return RSum(p->next)+p->data;
+}
+
 int main()
 {
     int A[] = {3, 5, 7, 10, 15};
@@ -86,6 +95,7 @@ int main()
     printf("\n%d", count(first));
     printf("\n%d", RCount(first));
     printf("\n%d", sum(first));
+    printf("\n%d", RSum(first));
     
     return 0;
 }

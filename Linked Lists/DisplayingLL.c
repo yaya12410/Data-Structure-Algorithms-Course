@@ -36,10 +36,20 @@ void display(struct Node *p)
     }
 }
 
+void RDisplay(struct Node *p)
+{
+    if(p)
+    {
+        RDisplay(p->next);
+        printf(" %d", p->data);
+    }
+}
+
 int main()
 {
     int A[] = {3, 5, 7, 10, 15};
     create(A, 5);
     display(first);
+    RDisplay(first);
     return 0;
 }

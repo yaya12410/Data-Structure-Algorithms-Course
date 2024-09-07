@@ -102,7 +102,7 @@ int max(struct Node *p)
 
 int RMax(struct Node *p)
 {
-    int x=0;
+    int x;
     if(!p)
     {
         return 0;
@@ -118,8 +118,22 @@ int RMax(struct Node *p)
     }
 }
 
+struct Node * search(struct Node *p, int key)
+{
+    while(p)
+    {
+        if(p->data==key)
+        {
+            return p;
+        }
+        p = p->next;
+    }
+    return NULL;
+}
+
 int main()
 {
+    struct Node * f;
     int A[] = {3, 5, 77, 10, 15};
     create(A, 5);
     display(first);
@@ -131,6 +145,8 @@ int main()
     printf("\n%d", RSum(first));
     printf("\n%d", max(first));
     printf("\n%d", RMax(first));
+    f = search(first, 10);
+    printf("\n%d %d", f, f->data);
     
     return 0;
 }

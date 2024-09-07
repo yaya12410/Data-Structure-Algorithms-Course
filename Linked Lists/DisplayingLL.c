@@ -66,13 +66,26 @@ int RCount(struct Node *p)
     return c;
 }
 
+int sum(struct Node *p)
+{
+    int total = 0;
+    while(p)
+    {
+        total += p->data;
+        p = p->next;
+    }
+    return total;
+}
+
 int main()
 {
     int A[] = {3, 5, 7, 10, 15};
     create(A, 5);
     display(first);
     RDisplay(first);
+    printf("\n%d", count(first));
     printf("\n%d", RCount(first));
+    printf("\n%d", sum(first));
     
     return 0;
 }

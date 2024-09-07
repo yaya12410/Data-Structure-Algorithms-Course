@@ -45,11 +45,23 @@ void RDisplay(struct Node *p)
     }
 }
 
+int count(struct Node *p)
+{
+    int c=0;
+    while(p)
+    {
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+
 int main()
 {
     int A[] = {3, 5, 7, 10, 15};
     create(A, 5);
     display(first);
     RDisplay(first);
+    printf("\n%d", count(first));
     return 0;
 }

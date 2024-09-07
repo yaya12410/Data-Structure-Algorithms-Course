@@ -131,9 +131,23 @@ struct Node * search(struct Node *p, int key)
     return NULL;
 }
 
+struct Node * RSearch(struct Node *p, int key)
+{
+    if(p)
+    {
+        if(p->data==key)
+        {
+            return p;
+        }
+        return RSearch(p->next, key);
+    }
+    return NULL;
+}
+
 int main()
 {
     struct Node * f;
+    struct Node * y;
     int A[] = {3, 5, 77, 10, 15};
     create(A, 5);
     display(first);
@@ -147,6 +161,8 @@ int main()
     printf("\n%d", RMax(first));
     f = search(first, 10);
     printf("\n%d %d", f, f->data);
+    y = RSearch(first, 10);
+    printf("\n%d %d", y, y->data);
     
     return 0;
 }

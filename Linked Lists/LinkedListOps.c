@@ -45,20 +45,6 @@ void RDisplay(struct Node *p)
     }
 }
 
-int max(struct Node *p)
-{
-    int max = p->data;
-    while(p)
-    {
-        if(p->data>max)
-        {
-            max = p->data;
-        }
-        p = p->next;
-    }
-    return max;
-}
-
 int count(struct Node *p)
 {
     int c=0;
@@ -100,9 +86,41 @@ int RSum(struct Node *p)
     return RSum(p->next)+p->data;
 }
 
+int max(struct Node *p)
+{
+    int max = p->data;
+    while(p)
+    {
+        if(p->data>max)
+        {
+            max = p->data;
+        }
+        p = p->next;
+    }
+    return max;
+}
+
+int RMax(struct Node *p)
+{
+    int x=0;
+    if(!p)
+    {
+        return 0;
+    }
+    if(p)
+    {
+        x = RMax(p->next);
+        if(p->data>x)
+        {
+            return p->data;
+        }   
+        return x;
+    }
+}
+
 int main()
 {
-    int A[] = {3, 5, 7, 10, 15};
+    int A[] = {3, 5, 77, 10, 15};
     create(A, 5);
     display(first);
     printf("\n");
@@ -112,6 +130,7 @@ int main()
     printf("\n%d", sum(first));
     printf("\n%d", RSum(first));
     printf("\n%d", max(first));
+    printf("\n%d", RMax(first));
     
     return 0;
 }

@@ -56,12 +56,23 @@ int count(struct Node *p)
     return c;
 }
 
+int RCount(struct Node *p)
+{
+    static int c = 0;
+    if(p)
+    {
+        return RCount(p->next)+1;
+    }
+    return c;
+}
+
 int main()
 {
     int A[] = {3, 5, 7, 10, 15};
     create(A, 5);
     display(first);
     RDisplay(first);
-    printf("\n%d", count(first));
+    printf("\n%d", RCount(first));
+    
     return 0;
 }

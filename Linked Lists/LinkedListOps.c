@@ -153,10 +153,10 @@ struct Node * ImprovedSearch(struct Node *p, int key)
         if(p->data==key)
         {
             temp = q->next;
-            q = p->next;
-            p = first;
+            q->next = p->next;
+            p->next = first;
             first = temp;
-            return q->next;
+            return first;
         }
         else
         {
@@ -170,10 +170,37 @@ struct Node * ImprovedSearch(struct Node *p, int key)
     }
 }
 
+void insert(struct Node *p, int pos, int value)
+{
+    struct Node *n = (struct Node *)malloc(sizeof(struct Node));
+    struct Node *temp;
+    if(pos==0)
+    {
+        n->next = first;
+        n->data = value;
+        first = n;
+        return;
+    }
+    for(int i=0; i<pos-1 && p; i++)
+    {
+        if(p)
+        {
+        p = p->next;
+        }
+    }
+    if(p)
+    {
+    n->next = p->next;
+    p->next = n;
+    n->data = value;
+    }
+}
+
 int main()
 {
     struct Node * f;
     struct Node * y;
+    struct Node * t;
     int A[] = {3, 5, 77, 10, 15};
     create(A, 5);
     display(first);
@@ -190,6 +217,10 @@ int main()
     y = RSearch(first, 10);
     printf("\n%d %d", y, y->data);
     ImprovedSearch(first, 10);
-    
+    printf("\n");
+    display(first);
+    insert(first, 5, 222);
+    printf("\n");
+    display(first);
     return 0;
 }

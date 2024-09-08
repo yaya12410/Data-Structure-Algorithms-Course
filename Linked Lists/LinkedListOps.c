@@ -144,6 +144,32 @@ struct Node * RSearch(struct Node *p, int key)
     return NULL;
 }
 
+struct Node * ImprovedSearch(struct Node *p, int key)
+{
+    struct Node *q;
+    struct Node *temp;
+    while(p)
+    {
+        if(p->data==key)
+        {
+            temp = q->next;
+            q = p->next;
+            p = first;
+            first = temp;
+            return q->next;
+        }
+        else
+        {
+            q = p;
+            p = p->next;
+        }
+    }
+    if(!p)
+    {
+        return NULL;
+    }
+}
+
 int main()
 {
     struct Node * f;
@@ -163,6 +189,7 @@ int main()
     printf("\n%d %d", f, f->data);
     y = RSearch(first, 10);
     printf("\n%d %d", y, y->data);
+    ImprovedSearch(first, 10);
     
     return 0;
 }

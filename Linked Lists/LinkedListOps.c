@@ -244,12 +244,12 @@ void SortedInsert(struct Node *p, int value)
     }
 }
 
-void delete(struct Node *p, int pos)
+int delete(struct Node *p, int pos)
 {
     struct Node *q=NULL;
     if(pos<1 || pos>count(p))
     {
-        return;
+        return -1;
     }
     for(int i=0; i<pos-1; i++)
     {
@@ -262,12 +262,14 @@ void delete(struct Node *p, int pos)
         first = first->next;
         int delete1 = del->data;
         free(del);
+        return delete1;
     }
     else
     {
         q->next = p->next;
         int delete2 = p->data;
         free(p);
+        return delete2;
     }
 }
 

@@ -214,33 +214,62 @@ void insertLast(struct Node *p, int value)
     }
 }
 
+void SortedInsert(struct Node *p, int value)
+{
+    struct Node *t, *q=NULL;
+    t = (struct Node *)malloc(sizeof(struct Node));
+    t->data = value;
+    t->next = NULL;
+    if(!p)
+    {
+        first = t;
+    }
+    else
+    {
+        while(p && p->data<value)
+        {
+            q = p;
+            p = p->next;
+        }
+        if(p==first)
+        {
+            t->next = first;
+            first = t;
+        }
+        else
+        {
+            t->next = q->next;
+            q->next = t;
+        }
+    }
+}
+
 int main()
 {
-    // struct Node * f;
-    // struct Node * y;
-    // struct Node * t;
-    int A[] = {3, 5, 77, 10, 15};
+    struct Node * f;
+    struct Node * y;
+    struct Node * t;
+    int A[] = {3, 5, 6, 7, 8};
     create(A, 5);
     display(first);
     printf("\n");
-    // RDisplay(first);
+    RDisplay(first);
+    printf("\n");
     insertLast(first, 9);
     display(first);
-    // printf("\n%d", count(first));
-    // printf("\n%d", RCount(first));
-    // printf("\n%d", sum(first));
-    // printf("\n%d", RSum(first));
-    // printf("\n%d", max(first));
-    // printf("\n%d", RMax(first));
-    // f = search(first, 10);
-    // printf("\n%d %d", f, f->data);
-    // y = RSearch(first, 10);
-    // printf("\n%d %d", y, y->data);
-    // ImprovedSearch(first, 10);
-    // printf("\n");
-    // display(first);
-    // insert(first, 5, 222);
-    // printf("\n");
-    // display(first);
+    printf("\n%d", count(first));
+    printf("\n%d", RCount(first));
+    printf("\n%d", sum(first));
+    printf("\n%d", RSum(first));
+    printf("\n%d", max(first));
+    printf("\n%d", RMax(first));
+    f = search(first, 9);
+    printf("\n%d %d", f, f->data);
+    y = RSearch(first, 9);
+    printf("\n%d %d", y, y->data);
+    // printf("\n%d %d", ImprovedSearch(first, 8), );
+    printf("\n");
+    SortedInsert(first, 11);
+    display(first);
     return 0;
 }

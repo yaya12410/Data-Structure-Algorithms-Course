@@ -247,6 +247,10 @@ void SortedInsert(struct Node *p, int value)
 void delete(struct Node *p, int pos)
 {
     struct Node *q=NULL;
+    if(pos<1 || pos>count(p))
+    {
+        return;
+    }
     for(int i=0; i<pos-1; i++)
     {
         q = p;
@@ -293,7 +297,7 @@ int main()
     // printf("\n%d %d", ImprovedSearch(first, 8), );
     printf("\n");
     SortedInsert(first, 11);
-    delete(first, 7);
+    delete(first, 6);
     display(first);
     return 0;
 }

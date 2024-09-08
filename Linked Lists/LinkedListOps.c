@@ -244,6 +244,29 @@ void SortedInsert(struct Node *p, int value)
     }
 }
 
+void delete(struct Node *p, int pos)
+{
+    struct Node *q=NULL;
+    for(int i=0; i<pos-1; i++)
+    {
+        q = p;
+        p = p->next;
+    }
+    if(p==first)
+    {
+        struct Node *del=first;
+        first = first->next;
+        int delete1 = del->data;
+        free(del);
+    }
+    else
+    {
+        q->next = p->next;
+        int delete2 = p->data;
+        free(p);
+    }
+}
+
 int main()
 {
     struct Node * f;
@@ -270,6 +293,7 @@ int main()
     // printf("\n%d %d", ImprovedSearch(first, 8), );
     printf("\n");
     SortedInsert(first, 11);
+    delete(first, 7);
     display(first);
     return 0;
 }

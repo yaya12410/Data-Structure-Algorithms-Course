@@ -8,11 +8,12 @@ struct Node
 };
 
 struct Node *first=NULL;
+struct Node *last=NULL;
 
 void create(int A[], int n)
 {
     int i;
-    struct Node *t, *last;
+    struct Node *t;
     first = (struct Node *)malloc(sizeof(struct Node));
     first->data = A[0];
     first->next = NULL;
@@ -196,31 +197,50 @@ void insert(struct Node *p, int pos, int value)
     }
 }
 
+void insertLast(struct Node *p, int value)
+{
+    struct Node * temp = (struct Node *)malloc(sizeof(struct Node));
+    temp->data = value;
+    temp->next = NULL;
+    if(!p)
+    {
+        first = temp;
+        last = temp;
+    }
+    else
+    {
+        last->next = temp;
+        last = temp;
+    }
+}
+
 int main()
 {
-    struct Node * f;
-    struct Node * y;
-    struct Node * t;
+    // struct Node * f;
+    // struct Node * y;
+    // struct Node * t;
     int A[] = {3, 5, 77, 10, 15};
     create(A, 5);
     display(first);
     printf("\n");
-    RDisplay(first);
-    printf("\n%d", count(first));
-    printf("\n%d", RCount(first));
-    printf("\n%d", sum(first));
-    printf("\n%d", RSum(first));
-    printf("\n%d", max(first));
-    printf("\n%d", RMax(first));
-    f = search(first, 10);
-    printf("\n%d %d", f, f->data);
-    y = RSearch(first, 10);
-    printf("\n%d %d", y, y->data);
-    ImprovedSearch(first, 10);
-    printf("\n");
+    // RDisplay(first);
+    insertLast(first, 9);
     display(first);
-    insert(first, 5, 222);
-    printf("\n");
-    display(first);
+    // printf("\n%d", count(first));
+    // printf("\n%d", RCount(first));
+    // printf("\n%d", sum(first));
+    // printf("\n%d", RSum(first));
+    // printf("\n%d", max(first));
+    // printf("\n%d", RMax(first));
+    // f = search(first, 10);
+    // printf("\n%d %d", f, f->data);
+    // y = RSearch(first, 10);
+    // printf("\n%d %d", y, y->data);
+    // ImprovedSearch(first, 10);
+    // printf("\n");
+    // display(first);
+    // insert(first, 5, 222);
+    // printf("\n");
+    // display(first);
     return 0;
 }

@@ -273,6 +273,21 @@ int delete(struct Node *p, int pos)
     }
 }
 
+int isSorted(struct Node *p)
+{
+    int x = -65536;
+    while(p)
+    {
+        if(p->data<x)
+        {
+            return 0;
+        }
+        x = p->data;
+        p = p->next;
+    }
+    return 1;
+}
+
 int main()
 {
     struct Node * f;
@@ -301,5 +316,6 @@ int main()
     SortedInsert(first, 11);
     delete(first, 6);
     display(first);
+    printf("\n%d", isSorted(first));
     return 0;
 }

@@ -440,15 +440,36 @@ void merge(struct Node *p, struct Node *q)
     }
 }
 
+int isLooped(struct Node *p)
+{
+    struct Node *q=first;
+    do
+    {
+        p=p->next;
+        q=q->next;
+        if(!q)
+        {
+            return 0;
+        }
+        if(p==q)
+        {
+            return 1;
+        }
+    }while(p && q);
+    return 0;
+}
+
 int main()
 {
+    struct Node *ptr1, *ptr2;
     int A[] = {10, 20, 30, 40, 50};
-    int B[] = {522, 2215, 2225, 2235, 44445};
+    int B[] = {5, 2215, 2225, 2235, 44445};
     create(A, 5);
     create2(B, 5);
-    merge(first, second);
-    display(third);
-    
+    ptr1 = first->next->next; 
+    ptr2 = first->next->next->next->next;
+    ptr2->next = ptr1;
+    printf("%d", isLooped(second));
     //cleaning the main function
     return 0;
 }

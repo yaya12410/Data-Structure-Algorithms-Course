@@ -307,10 +307,24 @@ void removeDuplicates(struct Node *p)
     }
 }
 
+void RecursiveReverseLinks(struct Node *q, struct Node *p)
+{
+    if(p)
+    {
+        RecursiveReverseLinks(p, p->next);
+        p->next = q;
+    }
+    else
+    {
+        first = q;
+    }
+}
+
 int main()
 {
     struct Node * f;
     struct Node * y;
+    struct Node * aux=NULL;
     int A[] = {3, 3, 5, 5, 7};
     create(A, 5);
     display(first);
@@ -336,6 +350,9 @@ int main()
     printf("\n%d", isSorted(first));
     printf("\n");
     removeDuplicates(first);
+    display(first);
+    printf("Here is the reversed linked list:\n");
+    RecursiveReverseLinks(aux, first);
     display(first);
     return 0;
 }

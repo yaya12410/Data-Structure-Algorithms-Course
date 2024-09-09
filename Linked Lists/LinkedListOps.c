@@ -390,19 +390,51 @@ void concat(struct Node *p, struct Node *q)
     q->next = p;
 }
 
+void merge(struct Node *p, struct Node *q)
+{
+    struct Node *last;
+    if(p->data<q->data)
+    {
+        third = p;
+        last = p;
+        p = p->next;
+        third->next = NULL;
+    }
+    else
+    {
+        third = q;
+        last = q;
+        q = q->next;
+        third->next = NULL;
+    }
+    while(p && q)
+    {
+        if(p->data<q->data)
+        {
+            last->next = p;
+            last = last->next;
+            p = p->next;
+            last->next = NULL;
+        }
+        else
+        {
+            last->next = q;
+            last = last->next;
+            q = q->next;
+            last->next = NULL;
+        }
+    }
+}
+
 int main()
 {
-    int A[] = {50, 40, 10, 30, 20};
-    int B[] = {1, 2, 3, 4, 5};
+    int A[] = {10, 20, 30, 40, 50};
+    int B[] = {5, 15, 25, 35, 45};
     create(A, 5);
     create2(B, 5);
-    printf("First:\n");
-    display(first);
-    printf("\nSecond:\n");
-    display(second);
-    concat(first, second);
-    printf("\nConcatinated linked list:\n");
+    merge(first, second);
     display(third);
+    
     //cleaning the main function
     return 0;
 }

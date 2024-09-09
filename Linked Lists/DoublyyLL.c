@@ -69,7 +69,10 @@ void insert(struct Node *p, int index, int value)
         }
         newNode->data=value;
         q=p->next;
+        if(q)
+        {
         q->prev=newNode;
+        }
         newNode->next=q;
         p->next=newNode;
         newNode->prev=p;

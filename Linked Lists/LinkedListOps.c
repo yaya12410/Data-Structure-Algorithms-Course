@@ -424,12 +424,26 @@ void merge(struct Node *p, struct Node *q)
             last->next = NULL;
         }
     }
+    while(p)
+    {
+        last->next = p;
+        last = last->next;
+        p = p->next;
+        last->next = NULL;
+    }
+    while(q)
+    {
+        last->next = q;
+        last = last->next;
+        q = q->next;
+        last->next = NULL;
+    }
 }
 
 int main()
 {
     int A[] = {10, 20, 30, 40, 50};
-    int B[] = {5, 15, 25, 35, 45};
+    int B[] = {522, 2215, 2225, 2235, 44445};
     create(A, 5);
     create2(B, 5);
     merge(first, second);

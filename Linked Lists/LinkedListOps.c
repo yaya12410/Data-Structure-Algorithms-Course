@@ -333,6 +333,27 @@ void reverseLinks(struct Node *p)
     first=q;
 }
 
+void reverseData(struct Node *p)
+{
+    int numOfNodes = count(p); 
+    int i=0;
+    int * A = (int *)malloc(numOfNodes*sizeof(int));
+    while(p)
+    {
+        A[i]=p->data;
+        p=p->next;
+        i++;
+    }
+    p=first;
+    i--;
+    while(p)
+    {
+        p->data=A[i];
+        p=p->next;
+        i--;
+    }
+}
+
 int main()
 {
     struct Node * f;
@@ -365,7 +386,7 @@ int main()
     removeDuplicates(first);
     display(first);
     printf("\nHere is the reversed linked list:\n");
-    reverseLinks(first);
+    reverseData(first);
     display(first);
     return 0;
 }

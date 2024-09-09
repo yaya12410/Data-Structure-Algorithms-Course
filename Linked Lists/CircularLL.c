@@ -98,6 +98,32 @@ void insert(struct Node *h, int index, int value)
     }
 }
 
+int delete(struct Node *h, int index)
+{
+    struct Node *q;
+    if(index==0)
+    {
+        while(h->next!=Head)
+        {
+            h=h->next;
+        }
+        h->next=Head->next;
+        int del=Head->data;
+        free(Head);
+        Head=h->next;
+        return del;
+    }
+    for(int i=0; i<index-2; i++)
+    {
+        h=h->next;
+    }
+    q=h->next;
+    h->next=q->next;
+    int del=q->data;
+    free(q);
+    return del;
+}
+
 int main()
 {
     int Array[] = {2, 3, 4, 5, 6};
@@ -105,6 +131,9 @@ int main()
     RDisplay(Head);
 
     insert(Head, 5, 10);
+    printf("\n");
+    display(Head);
+    delete(Head, 0);
     printf("\n");
     display(Head);
     return 0;

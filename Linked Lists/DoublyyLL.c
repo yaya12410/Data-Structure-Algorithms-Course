@@ -79,6 +79,47 @@ void insert(struct Node *p, int index, int value)
     }
 }
 
+int delete(struct Node *p, int index)
+{
+    int x;
+    if(index<1 || index>length(p))
+    {
+        return -1;
+    }
+    if(index==1)
+    {
+        first=first->next;
+        if(first)
+        {
+            first->prev=NULL;
+        }
+        x=p->data;
+        free(p);
+        return x;
+    }
+    else
+    {
+        for(int i=0; i<index-1; i++)
+        {
+            p=p->next;
+        }
+        if(p->next)
+        {
+            p->next->prev=p->prev;
+            p->prev->next=p->next;
+            x= p->data;
+            free(p);
+        }
+        else
+        {
+            p->prev->next=NULL;
+            x=p->data;
+            free(p);
+        }
+        return x;
+    }
+}
+
 int main()
 {
     int A[]={1, 2, 3, 4, 5};
@@ -86,6 +127,9 @@ int main()
     printf("Here is length %d", length(first));
     printf("\n");
     insert(first, 4, 123);
+    display(first);
+    printf("\nDeleted element: %d\n", delete(first, 5));
+    printf("\n");
     display(first);
     return 0;
 }

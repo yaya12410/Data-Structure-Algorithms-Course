@@ -320,6 +320,19 @@ void RecursiveReverseLinks(struct Node *q, struct Node *p)
     }
 }
 
+void reverseLinks(struct Node *p)
+{
+    struct Node *q=NULL, *r=NULL;
+    while(p)
+    {
+        r=q;
+        q=p;
+        p=p->next;
+        q->next=r;
+    }
+    first=q;
+}
+
 int main()
 {
     struct Node * f;
@@ -351,8 +364,8 @@ int main()
     printf("\n");
     removeDuplicates(first);
     display(first);
-    printf("Here is the reversed linked list:\n");
-    RecursiveReverseLinks(aux, first);
+    printf("\nHere is the reversed linked list:\n");
+    reverseLinks(first);
     display(first);
     return 0;
 }

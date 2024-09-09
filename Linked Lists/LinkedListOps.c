@@ -447,15 +447,19 @@ int isLooped(struct Node *p)
     {
         p=p->next;
         q=q->next;
-        if(!q)
+        if(q)
         {
-            return 0;
+            q=q->next;
         }
         if(p==q)
         {
             return 1;
         }
-    }while(p && q);
+    }while(p && q && p!=q);
+    if(p==q)
+    {
+        return 1;
+    }
     return 0;
 }
 
@@ -469,7 +473,7 @@ int main()
     ptr1 = first->next->next; 
     ptr2 = first->next->next->next->next;
     ptr2->next = ptr1;
-    printf("%d", isLooped(second));
+    printf("%d", isLooped(first));
     //cleaning the main function
     return 0;
 }

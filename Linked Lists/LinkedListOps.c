@@ -8,16 +8,35 @@ struct Node
 };
 
 struct Node *first=NULL;
-struct Node *last=NULL;
+struct Node *second=NULL;
+struct Node *third=NULL;
 
 void create(int A[], int n)
 {
     int i;
-    struct Node *t;
+    struct Node *t, *last;
     first = (struct Node *)malloc(sizeof(struct Node));
     first->data = A[0];
     first->next = NULL;
     last = first;
+    for(i=1; i<n; i++)
+    {
+        t=(struct Node *)malloc(sizeof(struct Node));
+        t->data = A[i];
+        t->next = NULL;
+        last->next = t;
+        last = t;
+    }
+}
+
+void create2(int A[], int n)
+{
+    int i;
+    struct Node *t, *last;
+    second = (struct Node *)malloc(sizeof(struct Node));
+    second->data = A[0];
+    second->next = NULL;
+    last = second;
     for(i=1; i<n; i++)
     {
         t=(struct Node *)malloc(sizeof(struct Node));
@@ -199,6 +218,13 @@ void insert(struct Node *p, int pos, int value)
 
 void insertLast(struct Node *p, int value)
 {
+    struct Node *last=NULL;
+    while(p)
+    {
+        last=p;
+        p=p->next;
+    }
+    p=first;
     struct Node * temp = (struct Node *)malloc(sizeof(struct Node));
     temp->data = value;
     temp->next = NULL;
@@ -354,39 +380,29 @@ void reverseData(struct Node *p)
     }
 }
 
+void concat(struct Node *p, struct Node *q)
+{
+    third = q;
+    while(q->next)
+    {
+        q=q->next;
+    }
+    q->next = p;
+}
+
 int main()
 {
-    struct Node * f;
-    struct Node * y;
-    struct Node * aux=NULL;
-    int A[] = {3, 3, 5, 5, 7};
+    int A[] = {50, 40, 10, 30, 20};
+    int B[] = {1, 2, 3, 4, 5};
     create(A, 5);
+    create2(B, 5);
+    printf("First:\n");
     display(first);
-    printf("\n");
-    RDisplay(first);
-    printf("\n");
-    insertLast(first, 9);
-    display(first);
-    printf("\n%d", count(first));
-    printf("\n%d", RCount(first));
-    printf("\n%d", sum(first));
-    printf("\n%d", RSum(first));
-    printf("\n%d", max(first));
-    printf("\n%d", RMax(first));
-    f = search(first, 9);
-    printf("\n%d %d", f, f->data);
-    y = RSearch(first, 9);
-    printf("\n%d %d", y, y->data);
-    // printf("\n%d %d", ImprovedSearch(first, 8), );
-    printf("\n");
-    SortedInsert(first, 11);
-    delete(first, 6);
-    printf("\n%d", isSorted(first));
-    printf("\n");
-    removeDuplicates(first);
-    display(first);
-    printf("\nHere is the reversed linked list:\n");
-    reverseData(first);
-    display(first);
+    printf("\nSecond:\n");
+    display(second);
+    concat(first, second);
+    printf("\nConcatinated linked list:\n");
+    display(third);
+    //cleaning the main function
     return 0;
 }

@@ -120,6 +120,22 @@ int delete(struct Node *p, int index)
     }
 }
 
+void reverse(struct Node *p)
+{
+    struct Node *temp;
+    while(p)
+    {
+        temp=p->prev;
+        p->prev=p->next;
+        p->next=temp;
+        if(!p->prev)
+        {
+            first=p;
+        }
+        p=p->prev;
+    }
+}
+
 int main()
 {
     int A[]={1, 2, 3, 4, 5};
@@ -129,6 +145,9 @@ int main()
     insert(first, 4, 123);
     display(first);
     printf("\nDeleted element: %d\n", delete(first, 5));
+    printf("\n");
+    display(first);
+    reverse(first);
     printf("\n");
     display(first);
     return 0;

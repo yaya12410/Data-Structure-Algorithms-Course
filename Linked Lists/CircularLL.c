@@ -101,7 +101,11 @@ void insert(struct Node *h, int index, int value)
 int delete(struct Node *h, int index)
 {
     struct Node *q;
-    if(index==0)
+    if(index<1 || index>Length(h))
+    {
+        return -1;
+    }
+    if(index==1)
     {
         while(h->next!=Head)
         {
@@ -133,7 +137,7 @@ int main()
     insert(Head, 5, 10);
     printf("\n");
     display(Head);
-    delete(Head, 0);
+    delete(Head, 2);
     printf("\n");
     display(Head);
     return 0;

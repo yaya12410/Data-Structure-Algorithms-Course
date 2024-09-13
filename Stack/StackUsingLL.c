@@ -4,11 +4,11 @@
 
 struct Node 
 {
-    char data;
+    int data;
     struct Node *next;
 }*top=NULL;
 
-void push(char value)
+void push(int value)
 {
     struct Node *n = (struct Node *)malloc(sizeof(struct Node));
     if(!n)
@@ -23,7 +23,7 @@ void push(char value)
     }
 }
 
-char pop()
+int pop()
 {
     struct Node *p=top;
     if(!top)
@@ -33,7 +33,7 @@ char pop()
     }
     else
     {
-        char deleted=top->data;
+        int deleted=top->data;
         top=top->next;
         free(p);
         return deleted;
@@ -179,12 +179,47 @@ char *intoPost(char *infix)
     return postfix;
 }
 
+int Eval(char *postfix)
+{
+    int i=0, x1, x2, result;
+    for(i; postfix[i]!='\0'; i++)
+    {
+        if(isOperand(postfix[i]))
+        {
+            push(postfix[i]-'0');
+        }
+        else
+        {
+            x2=pop();
+            x1=pop();
+            switch (postfix[i])
+            {
+            case '+':
+                result=x1+x2;
+                break;
+            case '-':
+                result=x1-x2;
+                break;
+            case '*':
+                result=x1*x2;
+                break;
+            case '/':
+                result=x1/x2;
+                break;
+            default:
+                break;
+            }
+            push(result);
+        }
+    }
+    return(top->data);
+}
+
 int main()
 {
-    char *infix="(a+b)*c-d^e^f";
-    push('#');
-    char *postfix=intoPost(infix);
+    char *postfix="234*+82/-";
+    
 
-    printf("%s", postfix);
+    printf("%d", Eval(postfix));
     return 0;
 }

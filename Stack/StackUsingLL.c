@@ -76,7 +76,16 @@ int isBalanced(char *exp)
     return 0;
 }
 
-int pre(char x)
+int isEmpty()
+{
+    if(top==NULL)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+int outStackPre(char x)
 {
     if(x=='+' || x=='-')
     {
@@ -84,14 +93,44 @@ int pre(char x)
     }
     else if(x=='*' || x=='/')
     {
+        return 3;
+    }
+    else if(x=='(')
+    {
+        return 7;
+    }
+    
+    else if(x=='^')
+    {
+        return 6;
+    }
+    return 0;
+}
+
+int stackPre(char x)
+{
+    if(x=='+' || x=='-')
+    {
         return 2;
+    }
+    else if(x=='*' || x=='/')
+    {
+        return 4;
+    }
+    else if(x=='(')
+    {
+        return 0;
+    }
+    else if(x=='^')
+    {
+        return 5;
     }
     return 0;
 }
 
 int isOperand(char x)
 {
-    if(x=='+' || x=='-' || x=='*' || x=='/')
+    if(x=='+' || x=='-' || x=='*' || x=='/' || x=='(' || x==')' || x=='^')
     {
         return 0;
     }
@@ -103,18 +142,28 @@ char *intoPost(char *infix)
     int i=0, j=0;
     char *postfix;
     int len=strlen(infix);
-    postfix=(char *)malloc((len+2)*sizeof(char));
+    postfix=(char *)malloc((len+3)*sizeof(char));
     while(infix[i]!='\0')
     {
-        if(isOperand(infix[i]))
+        if(isOperand(infix[i])!=0)
         {
             postfix[j++]=infix[i++];
+            continue;
+        }
+        else if(isEmpty())
+        {
+            push(infix[i++]);
         }
         else
         {
-            if(pre(infix[i])>pre(top->data))
+            if(outStackPre(infix[i])>stackPre(top->data))
             {
                 push(infix[i++]);
+            }
+            else if(outStackPre(infix[i])==stackPre(top->data))
+            {
+                i++;
+                pop();
             }
             else
             {
@@ -132,7 +181,7 @@ char *intoPost(char *infix)
 
 int main()
 {
-    char *infix="a+b*c-d/e";
+    char *infix="(a+b)*c-d^e^f";
     push('#');
     char *postfix=intoPost(infix);
 

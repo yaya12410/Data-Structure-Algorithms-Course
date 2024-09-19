@@ -95,9 +95,31 @@ void iPreOrder(struct Node *p)
     }
 }
 
+void levelOrder(struct Node *p)
+{
+    struct Queue q;
+    create(&q, 100);
+    printf("%d ", p->data);
+    enqueue(&q, p);
+    while(!isEmpty(q))
+    {
+        p=dequeue(&q);
+        if(p->lchild)
+        {
+            printf("%d ", p->lchild->data);
+            enqueue(&q, p->lchild);
+        }
+        if(p->rchild)
+        {
+            printf("%d ", p->rchild->data);
+            enqueue(&q, p->rchild);
+        }
+    }
+}
+
 int main()
 {
     Create();
-    iPreOrder(root);
+    levelOrder(root);
     return 0;
 }

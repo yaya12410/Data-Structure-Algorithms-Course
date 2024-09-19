@@ -11,11 +11,11 @@ struct Stack
     struct Node **S;
 };
 
-void stackCc(struct Stack *st, int m2as)
+void stackCc(struct Stack *st, int mysize)
 {
-    st->size=m2as;
+    st->size=mysize;
     st->top=-1;
-    st->S=(struct Node **)malloc((sizeof(struct Node *))*m2as);
+    st->S=(struct Node **)malloc((sizeof(struct Node *))*st->size);
 }
 
 void push(struct Stack *st, struct Node * value)
@@ -33,7 +33,7 @@ void push(struct Stack *st, struct Node * value)
 
 struct Node * pop(struct Stack *st)
 {
-    int deleted=NULL;
+    struct Node * deleted=NULL;
     if(st->top==-1)
     {
         printf("Stack UNDERFLOW\n");
@@ -44,17 +44,6 @@ struct Node * pop(struct Stack *st)
         st->top--;
     }
     return deleted;
-}
-
-int peek(struct Stack *st, int index)
-{
-    int value=-1;
-    if(st->top-index+1<0)
-    {
-        printf("Invalid index :(");
-    }
-    value=st->S[st->top-index+1];
-    return value;
 }
 
 int isEmptyStack(struct Stack *st)

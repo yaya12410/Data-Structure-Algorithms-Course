@@ -117,9 +117,38 @@ void levelOrder(struct Node *p)
     }
 }
 
+int count(struct Node *p)
+{
+    if(p)
+    {
+        return count(p->lchild)+count(p->rchild)+1;
+    }
+    return 0;
+}
+
+int height(struct Node * p)
+{
+    int x=0, y=0;
+    if(p==0)
+    {
+        return 0;
+    }
+    x=height(p->lchild);
+    y=height(p->rchild);
+    if(x>y)
+    {
+        return x+1;
+    }
+    else
+    {
+        return y+1;
+    }
+}
+
 int main()
 {
     Create();
-    levelOrder(root);
+    printf("count is %d ", count(root));
+    printf("height is %d ", height(root));
     return 0;
 }

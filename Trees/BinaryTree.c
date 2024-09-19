@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"Queue.h"
+#include"Stack.h"
 
 struct Node *root=NULL;
 
@@ -74,9 +75,29 @@ void inOrder(struct Node *p)
     }
 }
 
+void iPreOrder(struct Node *p)
+{
+    struct Stack stk;
+    stackCc(&stk, 100);
+    while(p || !isEmptyStack(&stk))
+    {
+        if(p)
+        {
+            printf("%d ", p->data);
+            push(&stk, p);
+            p=p->lchild;
+        }
+        else
+        {
+            p=pop(&stk);
+            p=p->rchild;
+        }
+    }
+}
+
 int main()
 {
     Create();
-    preOrder(root);
+    iPreOrder(root);
     return 0;
 }

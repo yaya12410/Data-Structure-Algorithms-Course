@@ -23,7 +23,7 @@ void create(struct Queue *q, int size)
     q->size=size;
     q->front=0;
     q->rear=0;
-    q->Q=(struct Node **)malloc(q->size*sizeof(struct Node *));
+    q->Q=(struct Node **)malloc(sizeof(struct Node *)*size);
 }
 
 void enqueue(struct Queue *q, struct Node *value)

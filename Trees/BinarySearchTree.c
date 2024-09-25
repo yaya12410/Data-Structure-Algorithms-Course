@@ -74,7 +74,11 @@ struct Node * search(int key)
 
 void inOrder(struct Node *p)
 {
-    if(p)
+    if(p==NULL)
+    {
+        return;
+    }
+    else
     {
         inOrder(p->lchild);
         printf("%d ", p->data);
@@ -82,23 +86,43 @@ void inOrder(struct Node *p)
     }
 }
 
+struct Node * rInsert(struct Node *p, int key)
+{
+    struct Node *t=NULL;
+    if(!p)
+    {
+        t=(struct Node *)malloc(sizeof(struct Node));
+        t->data=key;
+        t->lchild=NULL;
+        t->rchild=NULL;
+        root=t;
+        return t;
+     }
+    else if(key<p->data)
+    {
+        p->lchild=(p->lchild, key);
+    }
+    else if(key>p->data)
+    {
+        p->rchild=(p->rchild, key);
+    }
+    return p;
+}
+
 int main()
 {
     struct Node *found;
-    insert(10);
-    insert(5);
-    insert(20);
-    insert(8);
-    insert(30);
+    rInsert(root, 10);
+    rInsert(root, 5);
     inOrder(root);
-    found=search(20);
-    if(!found)
-    {
-        printf("\nElement not found");
-    }
-    else
-    {
-        printf("\nElement %d is found", found->data);
-    }
+    // found=search(20);
+    // if(!found)
+    // {
+    //     printf("\nElement not found");
+    // }
+    // else
+    // {
+    //     printf("\nElement %d is found", found->data);
+    // }
     return 0;
 }

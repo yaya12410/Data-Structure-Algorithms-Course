@@ -86,6 +86,25 @@ void inOrder(struct Node *p)
     }
 }
 
+int height(struct Node * p)
+{
+    int x=0, y=0;
+    if(p==0)
+    {
+        return 0;
+    }
+    x=height(p->lchild);
+    y=height(p->rchild);
+    if(x>y)
+    {
+        return x+1;
+    }
+    else
+    {
+        return y+1;
+    }
+}
+
 struct Node * rInsert(struct Node *p, int key)
 {
     struct Node *t=NULL;
@@ -95,16 +114,82 @@ struct Node * rInsert(struct Node *p, int key)
         t->data=key;
         t->lchild=NULL;
         t->rchild=NULL;
-        root=t;
         return t;
      }
     else if(key<p->data)
     {
-        p->lchild=(p->lchild, key);
+        p->lchild=rInsert(p->lchild, key);
     }
     else if(key>p->data)
     {
-        p->rchild=(p->rchild, key);
+        p->rchild=rInsert(p->rchild, key);
+    }
+    return p;
+}
+
+struct Node * inPre(struct Node *p)
+{
+    while(p && p->lchild)
+    {
+        p=p->lchild;
+    }
+    return p;
+}
+
+struct Node * inSucc(struct Node *p)
+{
+    while(p && p->rchild)
+    {
+        p=p->rchild;
+    }
+    return p;
+}
+
+struct Node * delete(struct Node *p, int key)
+{
+    struct Node *q=NULL;
+    if(!p)
+    {
+        return NULL;
+    }
+    if(!p->lchild && !p->rchild)
+    {
+        if(height(p->lchild)>height(p->rchild))
+        {
+            q=inPre(p->lchild);
+            p->data=q->data;
+            p->lchild=delete(p->lchild, q->data);
+        }
+        return NULL;
+    }
+    if(key<p->data)
+    {
+        p->lchild=delete(p->lchild, key);
+    }
+    else if(key>p->data)
+    {
+        p->rchild=delete(p->rchild, key);
+    }
+    else
+    {
+        if(height(p->lchild)>height(p->rchild))
+        {
+            q=inPre(p->lchild);
+            p->data=q->data;
+            p->lchild=delete(p->lchild, q->data);
+        }
+        else if(height(p->lchild)<height(p->rchild))
+        {
+            q=inSucc(p->rchild);
+            p->data=q->data;
+            p->rchild=delete(p->rchild, q->data);
+        }
+        else
+        {
+            q=inPre(p->lchild);
+            p->data=q->data;
+            p->lchild=delete(p->lchild, q->data);
+        }
     }
     return p;
 }
@@ -112,8 +197,12 @@ struct Node * rInsert(struct Node *p, int key)
 int main()
 {
     struct Node *found;
+    root=rInsert(root, 50);
     rInsert(root, 10);
-    rInsert(root, 5);
+    rInsert(root, 40);
+    rInsert(root, 20);
+    rInsert(root, 30);
+    delete(root, 50);
     inOrder(root);
     // found=search(20);
     // if(!found)

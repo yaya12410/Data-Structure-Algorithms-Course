@@ -136,11 +136,30 @@ void CountSort(int Arr[], int num)
     }
 }
 
+void ShellSort(int Arr[], int num)
+{
+    int gap, i, j, temp;
+    for(gap=num/2; gap>=1; gap=gap/2)
+    {
+        for(i=gap; i<num; i++)
+        {
+            temp=Arr[i];
+            j=i-gap;
+            while(j>=0 && Arr[j]>temp)
+            {
+                Arr[j+gap]=Arr[j];
+                j=j-gap;
+            }
+            Arr[j+gap]=temp;
+        }
+    }
+}
+
 int main()
 {
     int Array[]={11, 13, 7, 12, 16, 9, 24, 5, 10, 3};
     int n=10;
-    CountSort(Array, n);
+    ShellSort(Array, n);
     for(int i=0; i<n; i++)
     {
         printf("%d ", Array[i]);

@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 void swap(int *a, int *b)
 {
@@ -94,11 +95,52 @@ void QuickSort(int Arr[], int low, int high)
     }
 }
 
+int findMax(int Arr[], int num)
+{
+    int max=(-__INT32_MAX__)+1;
+    for(int i=0; i<num; i++)
+    {
+        if(Arr[i]>max)
+        {
+            max=Arr[i];
+        }
+    }
+    return max;
+}
+
+void CountSort(int Arr[], int num)
+{
+    int max=findMax(Arr, num);
+    int i, j, *c;
+    c=(int *)malloc(sizeof(int)*(max+1));
+    for(i=0; i<max+1; i++)
+    {
+        c[i]=0;
+    }
+    for(i=0; i<num; i++)
+    {
+        c[Arr[i]]++;
+    }
+    i=0, j=0;
+    while(j<max+1)
+    {
+        if(c[j]>0)
+        {
+            Arr[i++]=j;
+            c[j]--;
+        }
+        else
+        {
+            j++;
+        }
+    }
+}
+
 int main()
 {
-    int Array[]={11, 13, 7, 12, 16, 9, 24, 5, 10, 3, __INT32_MAX__};
-    int n=11;
-    QuickSort(Array, 0, 10);
+    int Array[]={11, 13, 7, 12, 16, 9, 24, 5, 10, 3};
+    int n=10;
+    CountSort(Array, n);
     for(int i=0; i<n; i++)
     {
         printf("%d ", Array[i]);
